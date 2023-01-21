@@ -1,9 +1,9 @@
-const reviewModel = require('../models/reviewModel');
-const bookModel = require('../models/bookModel');
-const { isValidObjectId, isValidBody, isValidDate, isValidReviews, isValidPlainText } = require('../util/validator');
+import reviewModel from '../models/reviewModel.js';
+import bookModel from '../models/bookModel.js';
+import { isValidObjectId, isValidBody, isValidDate, isValidReviews, isValidPlainText } from '../util/validator.js';
 
 //addReview
-const addReview = async (req, res) => {
+export const addReview = async (req, res) => {
     try {
         const bookId = req.params.bookId;
         let reqBody = req.body;
@@ -38,7 +38,7 @@ const addReview = async (req, res) => {
 };
 
 //updateReview
-const updateReview = async (req, res) => {
+export const updateReview = async (req, res) => {
     try {
         const reqBody = req.body;
         const bookId = req.params.bookId;
@@ -93,7 +93,7 @@ const updateReview = async (req, res) => {
 };
 
 //deleteReview
-const deleteReview = async (req, res) => {
+export const deleteReview = async (req, res) => {
     try {
         const bookId = req.params.bookId;
         const reviewId = req.params.reviewId;
@@ -117,5 +117,3 @@ const deleteReview = async (req, res) => {
         return res.status(500).send({ status: false, message: err.message });
     }
 };
-
-module.exports = { addReview, updateReview, deleteReview };

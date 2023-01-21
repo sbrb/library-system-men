@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const bookSchema = new mongoose.Schema(
+export default mongoose.model('Book', new mongoose.Schema(
     {
         title: { type: String, required: true, unique: true, trim: true },
         excerpt: { type: String, required: true, trim: true },
@@ -14,5 +14,4 @@ const bookSchema = new mongoose.Schema(
         isDeleted: { type: Boolean, default: false },
         releasedAt: { type: Date, required: true, trim: true },
     }, { timestamps: true }
-)
-module.exports = mongoose.model('Book', bookSchema);
+));

@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId
+import mongoose from 'mongoose';
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const reviewSchema = new mongoose.Schema(
+export default mongoose.model('Review', new mongoose.Schema(
     {
         bookId: { type: ObjectId, required: true, ref: 'Book' },
         reviewedBy: { type: String, required: true, default: 'Guest', trim: true },
@@ -11,5 +11,4 @@ const reviewSchema = new mongoose.Schema(
         isDeleted: { type: Boolean, default: false }
     },
     { timestamps: true }
-)
-module.exports = mongoose.model('review', reviewSchema);
+));

@@ -1,10 +1,10 @@
-const bookModel = require('../models/bookModel');
-const userModel = require('../models/userModel');
-const reviewModel = require('../models/reviewModel');
-const { isValidBody, isValidObjectId, isValidTitle, isValidPlainText, isValidText, isValidIsbn, isValidDate, isValidSub } = require('../util/validator');
+import bookModel from '../models/bookModel.js';
+import userModel from '../models/userModel.js';
+import reviewModel from '../models/reviewModel.js';
+import { isValidBody, isValidObjectId, isValidTitle, isValidPlainText, isValidText, isValidIsbn, isValidDate, isValidSub } from '../util/validator.js';
 
 //createBook
-const createBook = async (req, res) => {
+export const createBook = async (req, res) => {
   try {
     const reqBody = req.body;
     const { title, excerpt, userId, ISBN, category, subcategory, releasedAt } = reqBody;
@@ -55,12 +55,13 @@ const createBook = async (req, res) => {
     return res.status(201).send({ status: true, message: `'${title}' book created successfully.`, data: newBook });
   }
   catch (err) {
+    console.log(err)
     return res.status(500).send({ status: false, error: err.message });
   }
 };
 
 //getBooksQuery
-const getBooksQuery = async (req, res) => {
+export const getBooksQuery = async (req, res) => {
   try {
     const reqBody = req.query;
     const { title, userId, category, subcategory } = reqBody;
@@ -86,7 +87,7 @@ const getBooksQuery = async (req, res) => {
 };
 
 //getBookById
-const getBookById = async (req, res) => {
+export const getBookById = async (req, res) => {
   try {
     const bookId = req.params.bookId
 
@@ -110,7 +111,7 @@ const getBookById = async (req, res) => {
 };
 
 //updateBookById
-const updateBookById = async (req, res) => {
+export const updateBookById = async (req, res) => {
   try {
     const reqBody = req.body;
     const bookId = req.params.bookId;
@@ -156,7 +157,7 @@ const updateBookById = async (req, res) => {
 };
 
 //deleteBookById
-const deleteBookById = async (req, res) => {
+export const deleteBookById = async (req, res) => {
   try {
     const bookId = req.params.bookId;
     if (!bookId) return res.status(400).send({ status: false, message: 'bookId is required on the path params.' });
@@ -177,5 +178,3 @@ const deleteBookById = async (req, res) => {
     return res.status(500).send({ status: false, error: err.message });
   }
 };
-
-module.exports = { createBook, getBooksQuery, getBookById, updateBookById, deleteBookById };

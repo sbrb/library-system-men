@@ -1,9 +1,9 @@
-const jwt = require('jsonwebtoken');
-const userModel = require('../models/userModel.js');
-const { isValidBody, isValidEnum, isValidNumber, isValidEmail, isValidPass, isValidStr } = require('../util/validator.js');
+import jwt from 'jsonwebtoken';
+import userModel from '../models/userModel.js';
+import { isValidBody, isValidEnum, isValidNumber, isValidEmail, isValidPass, isValidStr } from '../util/validator.js';
 
 //createUser
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
     const reqBody = req.body;
     const { title, name, phone, email, password, address } = reqBody;
@@ -19,11 +19,11 @@ const createUser = async (req, res) => {
     if (!isValidEnum(title)) return res.status(400).send({ status: false, message: 'title should be of Mr/Mrs/Miss.' });
     if (!isValidStr(name)) return res.status(400).send({ status: false, message: 'name should be only string.' });
     if (!isValidNumber(phone)) return res.status(400).send({ status: false, message: 'Please enter 10 digit phone number.' });
-    if (!isValidEmail(email)) return res.status(400).send({ status: false, message: 'Please enter a valid email.' })
+    if (!isValidEmail(email)) return res.status(400).send({ status: false, message: 'Please enter a valid email.' });
     if (!isValidPass(password)) return res.status(400).send({ status: false, message: 'Password should be 8-15 char & use 0-9,A-Z,a-z & special char this combination.' });
 
     if (typeof address !== 'object' || Array.isArray(address) || Object.keys(address).length === 0)
-      return res.status(400).send({ status: false, message: 'address should be an object' })
+      return res.status(400).send({ status: false, message: 'address should be an object' });
 
     const pin = address.pincode.length;
     if (pin > 6 || pin < 6) return res.status(400).send({ status: false, message: 'pincode should be 6 dist' });
@@ -43,7 +43,7 @@ const createUser = async (req, res) => {
 };
 
 //login
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const reqBody = req.body
     const { email, password } = reqBody
@@ -70,4 +70,3 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { createUser, login };

@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { createUser, login } = require('../controllers/userController.js');
-const { createBook, getBooksQuery, getBookById, updateBookById, deleteBookById } = require('../controllers/bookController.js');
-const { addReview, updateReview, deleteReview } = require('../controllers/reviewController');
-const { auth } = require('../middleware/auth.js');
+import { createUser, login } from '../controllers/userController.js';
+import { createBook, getBooksQuery, getBookById, updateBookById, deleteBookById } from '../controllers/bookController.js';
+import { addReview, updateReview, deleteReview } from'../controllers/reviewController.js';
+import { auth } from'../middleware/auth.js';
 
 //user
 router.post('/register', createUser);
@@ -21,4 +21,4 @@ router.post('/books/:bookId/review', addReview);
 router.put('/books/:bookId/review/:reviewId', updateReview);
 router.delete('/books/:bookId/review/:reviewId', deleteReview);
 
-module.exports = router;
+export default router;
